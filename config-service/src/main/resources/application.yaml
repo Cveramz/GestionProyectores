@@ -1,12 +1,12 @@
 server:
-port: 8081
+ port: 8081
 spring:
-cloud:
-config:
-server:
-git:
-default-label: main
-uri: https://github.com/JehisonBustamante/MINGESO_PRESTAMOS
-search-paths: config-data
-application:
-name: config-service
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/Cveramz/POR-TINGESO
+          search-paths: config-data
