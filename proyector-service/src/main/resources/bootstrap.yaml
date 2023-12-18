@@ -1,13 +1,12 @@
-server:
-  port: 8083
-
 spring:
   application:
     name: proyector-service
   cloud:
     config:
       enabled: true
-      uri: http://localhost:8083/
+      uri: http://localhost:8081/
+      name: proyector-service
+      label: main
   datasource:
     url: jdbc:postgresql://localhost:5432/proyector-PORTINGESO
     username: postgres

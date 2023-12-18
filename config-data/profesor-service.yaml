@@ -1,7 +1,5 @@
 server:
-  port: 8082
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  port: 8092
 
 management:
   endpoints:

@@ -1,18 +1,17 @@
-server:
-  port: 8082
-
 spring:
   application:
     name: profesor-service
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+    ddl-auto: update
   cloud:
     config:
       enabled: true
-      uri: http://localhost:8082/
+      uri: http://localhost:8081
+
   datasource:
     url: jdbc:postgresql://localhost:5432/profesor-PORTINGESO
     username: postgres
     password: 1234
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true

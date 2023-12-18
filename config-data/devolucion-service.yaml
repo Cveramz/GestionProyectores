@@ -1,5 +1,5 @@
 server:
-  port: 8084
+  port: 8094
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 

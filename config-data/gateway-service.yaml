@@ -18,7 +18,20 @@ spring:
             allowed-headers: "*"
             allow-credentials: true
       routes:
-        - id: profesores-service
-          uri: lb://profesores-service
+        - id: profesor-service
+          uri: lb://profesor-service
           predicates:
             - Path=/profesores/**
+        - id: prestamo-service
+          uri: lb://prestamo-service
+          predicates:
+            - Path=/prestamos/**
+        - id: proyector-service
+          uri: lb://proyector-service
+          predicates:
+            - Path=/proyectores/**
+        - id: devolucion-service
+          uri: lb://devolucion-service
+          predicates:
+            - Path=/devoluciones/**
+        
