@@ -1,0 +1,18 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: proyector-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8083/
+  datasource:
+    url: jdbc:postgresql://localhost:5432/proyector-PORTINGESO
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

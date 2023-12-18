@@ -1,0 +1,18 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: prestamo-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8085/
+  datasource:
+    url: jdbc:postgresql://localhost:5432/prestamo-PORTINGESO
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

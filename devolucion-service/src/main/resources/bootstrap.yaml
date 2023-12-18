@@ -1,0 +1,18 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: devolucion-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8084/
+  datasource:
+    url: jdbc:postgresql://localhost:5432/devolucion-PORTINGESO
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
