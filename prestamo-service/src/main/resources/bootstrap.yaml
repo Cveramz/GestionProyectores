@@ -5,6 +5,7 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8081/
+      label: main
   datasource:
     url: jdbc:postgresql://localhost:5432/prestamo-PORTINGESO
     username: postgres
