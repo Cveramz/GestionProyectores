@@ -29,4 +29,9 @@ public class ProyectorController {
         return proyectorService.agregarProyector(proyector);
     }
 
+    @PutMapping("/{id}")
+    public Proyector actualizarProyector(@PathVariable Long id, @RequestBody Proyector proyectorActualizado) {
+        return proyectorService.actualizarProyector(id, proyectorActualizado);
+    }
+
 }

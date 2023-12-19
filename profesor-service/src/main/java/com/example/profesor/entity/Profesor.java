@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Profesor {
     @Id
-    private Long idProfesor;
+    private String idProfesor;
     private String nombre;
     private String apellido;
 }

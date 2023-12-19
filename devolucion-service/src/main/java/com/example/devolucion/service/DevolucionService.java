@@ -40,4 +40,19 @@ public class DevolucionService {
     public void eliminarDevolucion(Long id) {
         devolucionRepository.deleteById(id);
     }
+
+    public boolean verificarAptoPorRut(String rut) {
+        int countDevolucionesConDanos = devolucionRepository.countDevolucionesConDanosPorRut(rut);
+        return countDevolucionesConDanos < 3;
+    }
+
+    public Devolucion obtenerUltimaDevolucionPorRut(String rut) {
+        List<Devolucion> devoluciones = devolucionRepository.findByidProfesorOrderByFechaDevolucionDesc(rut);
+
+        if (!devoluciones.isEmpty()) {
+            return devoluciones.get(0);
+        } else {
+            return null; // o puedes lanzar una excepción indicando que no se encontraron devoluciones para el rut dado
+        }
+    }
 }

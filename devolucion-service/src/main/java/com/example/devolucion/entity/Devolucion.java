@@ -15,11 +15,11 @@ public class Devolucion {
 
     private LocalDateTime fechaDevolucion;
 
-    private LocalDateTime horaDevolucion;
+    private String estadoDevolucion;
 
-    private String estadoDevolucion; // Buenas Condiciones, Con Daños
+    private Long idPrestamo;
 
-    private Long idPrestamo; // Identificador del préstamo relacionado
+    private String idProfesor;
 
 
 }

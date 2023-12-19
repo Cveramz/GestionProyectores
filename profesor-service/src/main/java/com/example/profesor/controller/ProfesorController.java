@@ -20,7 +20,7 @@ public class ProfesorController {
     }
 
     @GetMapping("/{id}")
-    public Profesor obtenerProfesorPorId(@PathVariable Long id) {
+    public Profesor obtenerProfesorPorId(@PathVariable String id) {
         return profesorService.obtenerProfesorPorId(id).orElse(null);
     }
 
@@ -30,12 +30,12 @@ public class ProfesorController {
     }
 
     @PutMapping("/{id}")
-    public Profesor actualizarProfesor(@PathVariable Long id, @RequestBody Profesor profesorActualizado) {
+    public Profesor actualizarProfesor(@PathVariable String id, @RequestBody Profesor profesorActualizado) {
         return profesorService.actualizarProfesor(id, profesorActualizado);
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarProfesor(@PathVariable Long id) {
+    public void eliminarProfesor(@PathVariable String id) {
         profesorService.eliminarProfesor(id);
     }
 }

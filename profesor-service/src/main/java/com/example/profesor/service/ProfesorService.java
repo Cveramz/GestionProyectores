@@ -18,7 +18,7 @@ public class ProfesorService {
         return profesorRepository.findAll();
     }
 
-    public Optional<Profesor> obtenerProfesorPorId(Long id) {
+    public Optional<Profesor> obtenerProfesorPorId(String id) {
         return profesorRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class ProfesorService {
         return profesorRepository.save(profesor);
     }
 
-    public Profesor actualizarProfesor(Long id, Profesor nuevoProfesor) {
+    public Profesor actualizarProfesor(String id, Profesor nuevoProfesor) {
         return profesorRepository.findById(id)
                 .map(profesor -> {
                     profesor.setNombre(nuevoProfesor.getNombre());
@@ -36,7 +36,7 @@ public class ProfesorService {
                 .orElse(null);
     }
 
-    public void eliminarProfesor(Long id) {
+    public void eliminarProfesor(String id) {
         profesorRepository.deleteById(id);
     }
 }

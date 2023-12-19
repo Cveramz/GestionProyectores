@@ -5,14 +5,13 @@ spring:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-    ddl-auto: update
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/profesor-PORTINGESO
+    username: postgres
+    password: 1234
   cloud:
     config:
       enabled: true
       uri: http://localhost:8081
       label: main
-
-  datasource:
-    url: jdbc:postgresql://localhost:5432/profesor-PORTINGESO
-    username: postgres
-    password: 1234

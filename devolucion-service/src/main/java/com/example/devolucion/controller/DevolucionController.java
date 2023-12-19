@@ -38,4 +38,14 @@ public class DevolucionController {
     public void eliminarDevolucion(@PathVariable Long id) {
         devolucionService.eliminarDevolucion(id);
     }
+
+    @GetMapping("/apto/{rut}")
+    public boolean verificarAptoPorRut(@PathVariable String rut) {
+        return devolucionService.verificarAptoPorRut(rut);
+    }
+
+    @GetMapping("/ultima/{rut}")
+    public Devolucion obtenerUltimaDevolucionPorRut(@PathVariable String rut) {
+        return devolucionService.obtenerUltimaDevolucionPorRut(rut);
+    }
 }

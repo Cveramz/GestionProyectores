@@ -26,16 +26,31 @@ public class PrestamoService {
         return prestamoRepository.save(prestamo);
     }
 
-    public Prestamo actualizarPrestamo(Long id, Prestamo prestamo) {
+    public Prestamo actualizarPrestamo(Long id, Prestamo prestamoActualizado) {
         Optional<Prestamo> existingPrestamo = prestamoRepository.findById(id);
 
         if (existingPrestamo.isPresent()) {
-            prestamo.setIdPrestamo(id);
-            return prestamoRepository.save(prestamo);
+            Prestamo prestamoExistente = existingPrestamo.get();
+
+            // Actualizar solo el campo 'estado'
+            prestamoExistente.setEstado(prestamoActualizado.getEstado());
+
+            return prestamoRepository.save(prestamoExistente);
         } else {
             return null; // O puedes lanzar una excepción indicando que el préstamo no existe
         }
     }
+    public Prestamo obtenerUltimoPrestamoPorRut(String rut) {
+        List<Prestamo> prestamos = prestamoRepository.findByIdProfesorOrderByFechaPrestamoDesc(rut);
+
+        if (!prestamos.isEmpty()) {
+            return prestamos.get(0);
+        } else {
+            return null; // o puedes lanzar una excepción indicando que no se encontraron préstamos para el rut dado
+        }
+    }
+
+
 
     public void eliminarPrestamo(Long id) {
         prestamoRepository.deleteById(id);

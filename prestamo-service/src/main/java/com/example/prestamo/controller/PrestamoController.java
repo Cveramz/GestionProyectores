@@ -38,4 +38,9 @@ public class PrestamoController {
     public void eliminarPrestamo(@PathVariable Long id) {
         prestamoService.eliminarPrestamo(id);
     }
+
+    @GetMapping("/ultimo/{rut}")
+    public Prestamo obtenerUltimoPrestamoPorRut(@PathVariable String rut) {
+        return prestamoService.obtenerUltimoPrestamoPorRut(rut);
+    }
 }

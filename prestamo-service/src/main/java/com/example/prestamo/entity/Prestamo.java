@@ -15,15 +15,13 @@ public class Prestamo {
 
     private LocalDateTime fechaPrestamo;
 
-    private LocalDateTime horaPrestamo;
-
     private String uso; // Dictado de clases, Reuniones varias, Examen de título
 
     private String estado; // En curso, devuelto
 
     private Long idProyector; // Identificador del proyector relacionado
 
-    private Long idProfesor; // Identificador del profesor relacionado
+    private String idProfesor; // Identificador del profesor relacionado
 
 
 }
