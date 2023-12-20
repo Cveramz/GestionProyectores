@@ -13,6 +13,7 @@ import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { DateTime } from 'luxon';
 
 const Solicitud = () => {
   const navigate = useNavigate();
@@ -95,8 +96,14 @@ const Solicitud = () => {
 
   const handlePrestarProyector = async () => {
     try {
+      // Obtén la fecha actual en la zona horaria de Santiago
+      const fechaSantiago = DateTime.local().setZone('America/Santiago');
+  
+      // Formatea la fecha en un formato deseado
+      const fechaPrestamo = fechaSantiago.toFormat("yyyy-MM-dd'T'HH:mm:ss");
+  
       const prestamoResponse = await axios.post('http://localhost:8080/prestamos', {
-        fechaPrestamo: new Date(),
+        fechaPrestamo: fechaPrestamo,
         uso: tipoUso,
         estado: 'En curso',
         idProyector: dataProyector,
