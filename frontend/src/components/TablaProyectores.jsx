@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TableSortLabel } from '@mui/material';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const TablaProyectores = () => {
   const [proyectores, setProyectores] = useState([]);
@@ -57,6 +59,9 @@ const TablaProyectores = () => {
         Lista de Proyectores
       </Typography>
       <hr />
+      <Button variant="contained" color="error" component={Link} to="/Inicio">
+        Volver al inicio
+      </Button>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

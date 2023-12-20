@@ -20,6 +20,7 @@ import {
   MenuItem,
   Snackbar,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Devolucion = () => {
   const [prestamos, setPrestamos] = useState([]);
@@ -132,6 +133,9 @@ const Devolucion = () => {
           Devolución realizada con éxito.
         </Alert>
       </Snackbar>
+      <Button variant="contained" color="error" component={Link} to="/OpcionesPrestamo">
+        Volver
+      </Button>
       <Alert severity="info">Seleccione un préstamo en curso</Alert>
       <br />
       <TableContainer component={Paper}>

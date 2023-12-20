@@ -4,6 +4,7 @@ import { Button, Typography, Paper, IconButton } from '@mui/material';
 import CrearProfesor from './CrearProfesor';
 import EditarProfesor from './EditarProfesor'; // Importa el nuevo componente
 import TablaProfesores from './TablaProfesores';
+import { Link } from 'react-router-dom';
 
 const GestionarProfesores = () => {
   const [openCrearProfesor, setOpenCrearProfesor] = useState(false);
@@ -82,11 +83,13 @@ const GestionarProfesores = () => {
         Gestionar Profesores
       </Typography>
       <hr />
+      <Button variant="contained" color="error" component={Link} to="/Inicio">
+        Volver al inicio
+      </Button>
       <Button
         variant="contained"
         color="primary"
         onClick={handleOpenCrearProfesor}
-        sx={{ marginTop: '1rem' }}
       >
         Crear Profesor
       </Button>

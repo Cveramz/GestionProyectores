@@ -12,6 +12,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Solicitud = () => {
   const navigate = useNavigate();
@@ -132,6 +133,10 @@ const Solicitud = () => {
         Solicitud de Proyector
       </Typography>
       <hr />
+      <Button variant="contained" color="error" component={Link} to="/OpcionesPrestamo">
+        Volver
+      </Button>
+      <br />
 
       {isApto !== null && (
         <div>

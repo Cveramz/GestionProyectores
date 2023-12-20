@@ -8,6 +8,7 @@ import TablaProyectores from './components/TablaProyectores';
 import OpcionesPrestamo from './components/OpcionesPrestamo';
 import Solicitud from './components/Solicitud';
 import Devolucion from './components/Devolucion';
+import Reporte from './components/Reporte';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/OpcionesPrestamo" element={<OpcionesPrestamo />} />
             <Route path="/Solicitud" element={<Solicitud />} />
             <Route path="/Devolucion" element={<Devolucion />} />
+            <Route path="/Reporte" element={<Reporte />} />
 
             
           </Routes>
