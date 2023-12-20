@@ -21,6 +21,8 @@ import {
   Snackbar,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { DateTime } from 'luxon';
+
 
 const Devolucion = () => {
   const [prestamos, setPrestamos] = useState([]);
@@ -80,35 +82,43 @@ const Devolucion = () => {
       const prestamoSeleccionado = prestamos.find(
         (prestamo) => prestamo.idPrestamo === idPrestamoSeleccionado
       );
-
+  
       if (!prestamoSeleccionado) {
         console.error('No se encontró el préstamo seleccionado');
         handleCloseModal();
         return;
       }
-
+  
+      // Obtén la fecha actual en la zona horaria de Santiago
+      const fechaSantiago = DateTime.local().setZone('America/Santiago');
+  
+      // Formatea la fecha en un formato deseado
+      const fechaDevolucion = fechaSantiago.toFormat("yyyy-MM-dd'T'HH:mm:ss");
+  
       await axios.put(`http://localhost:8080/prestamos/${idPrestamoSeleccionado}`, {
         estado: 'Devuelto',
       });
-
+  
       const response = await axios.post('http://localhost:8080/devoluciones', {
-        fechaDevolucion: new Date().toISOString(),
+        fechaDevolucion,
         estadoDevolucion,
         idPrestamo: idPrestamoSeleccionado,
         idProfesor: prestamoSeleccionado.idProfesor,
       });
-
+  
       await axios.put(`http://localhost:8080/proyectores/${prestamoSeleccionado.idProyector}`, {
         estado: 'Activo',
       });
-
+  
       setAlertOpen(true);
     } catch (error) {
       console.error('Error al confirmar devolución', error);
     }
-
+  
     handleCloseModal();
   };
+  
+
 
   const handleAlertClose = () => {
     setAlertOpen(false);
