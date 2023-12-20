@@ -101,9 +101,9 @@ const Reporte = () => {
               <TableRow key={index}>
                 <TableCell>{row.profesorNombre}</TableCell>
                 <TableCell>{new Date(row.fechaPrestamo).toLocaleDateString()}</TableCell>
-                <TableCell>{new Date(row.fechaPrestamo).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
+                <TableCell>{new Date(row.fechaPrestamo).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</TableCell>
                 <TableCell>{row.fechaDevolucion !== 'No devuelto' ? new Date(row.fechaDevolucion).toLocaleDateString() : 'No devuelto'}</TableCell>
-                <TableCell>{row.horaDevolucion}</TableCell>
+                <TableCell>{row.horaDevolucion !== 'No devuelto' ? new Date(row.fechaDevolucion).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'No devuelto'}</TableCell>
                 <TableCell>{row.hrsEnPoder}</TableCell>
                 <TableCell>{row.estadoDevolucion}</TableCell>
                 <TableCell>{getUsoTraducido(row.usoProyector)}</TableCell>
