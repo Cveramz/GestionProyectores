@@ -1,0 +1,95 @@
+version: '3'
+services:
+  config-service:
+    build:
+      context: ./config-service
+    ports:
+      - "8081:8081"
+    volumes:
+      - config-service-db:/path/to/config-service/data
+
+  profesor-service:
+    build:
+      context: ./profesor-service
+    ports:
+      - "8092:8092"
+    depends_on:
+      - config-service
+    volumes:
+      - profesor-service-db:/path/to/profesor-service/data
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://profesor-db:5432/profesor-PORTINGESO
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+  proyector-service:
+    build:
+      context: ./proyector-service
+    ports:
+      - "8093:8093"
+    depends_on:
+      - profesor-service
+    volumes:
+      - proyector-service-db:/path/to/proyector-service/data
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://proyector-db:5432/proyector-PORTINGESO
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+  prestamo-service:
+    build:
+      context: ./prestamo-service
+    ports:
+      - "8095:8095"
+    depends_on:
+      - proyector-service
+    volumes:
+      - prestamo-service-db:/path/to/prestamo-service/data
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://prestamo-db:5432/prestamo-PORTINGESO
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+  devolucion-service:
+    build:
+      context: ./devolucion-service
+    ports:
+      - "8094:8094"
+    depends_on:
+      - prestamo-service
+    volumes:
+      - devolucion-service-db:/path/to/devolucion-service/data
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://devolucion-db:5432/devolucion-PORTINGESO
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - devolucion-service
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gateway-service
+
+volumes:
+  config-service-db:
+  profesor-service-db:
+  proyector-service-db:
+  prestamo-service-db:
+  devolucion-service-db:
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16

@@ -70,21 +70,74 @@ const Solicitud = () => {
 
   const handleProfesorChange = async (event, newValue) => {
     setSelectedProfesor(newValue);
-
+  
     if (newValue) {
       try {
-        const response = await axios.get(
+        // Verificación 1: Obtener la aptitud del profesor
+        const responseApto = await axios.get(
           `http://localhost:8080/devoluciones/apto/${newValue.idProfesor}`
         );
-
-        setIsApto(response.data);
+  
+        setIsApto(responseApto.data);
         setTipoUso('');
         setDataProyector('');
+  
+        // Verificación 2: Obtener la última solicitud
+        const responseUltimaSolicitud = await axios.get(
+          `http://localhost:8080/prestamos/ultimo/${newValue.idProfesor}`
+        );
+  
+        // Verificación 3: Obtener la última devolución
+        const responseUltimaDevolucion = await axios.get(
+          `http://localhost:8080/devoluciones/ultima/${newValue.idProfesor}`
+        );
+  
+        // Realizar la verificación adicional basada en las últimas solicitudes y devoluciones
+        if (responseUltimaSolicitud.data && responseUltimaDevolucion.data) {
+          const fechaPrestamo = DateTime.fromISO(responseUltimaSolicitud.data.fechaPrestamo);
+          const fechaDevolucion = DateTime.fromISO(responseUltimaDevolucion.data.fechaDevolucion);
+  
+          // Calcular la diferencia en horas
+          const horasDiferencia = fechaDevolucion.diff(fechaPrestamo, 'hours').hours;
+  
+          console.log(`Horas en posesión: ${horasDiferencia}`);
+  
+          // Verificar si han pasado más de 6 horas desde la devolución
+          if (horasDiferencia > 6) {
+            // Calcular la fecha en la que vuelve a ser apto
+            const fechaApto = fechaDevolucion.plus({ days: 7 }).toLocaleString();
+  
+            console.log(`Fecha en la que vuelve a ser apto: ${fechaApto}`);
+  
+            // Calcular la diferencia en días
+            const diasDiferencia = fechaDevolucion.diffNow('days').days;
+  
+            // Ajustar la lógica para obtener un valor positivo
+            const diasDesdeDevolucion = Math.abs(diasDiferencia);
+  
+            console.log(`Días de diferencia: ${diasDesdeDevolucion}`);
+  
+            // Verificar si han pasado menos de 7 días desde la devolución
+            if (diasDesdeDevolucion < 7) {
+              // Realizar acciones adicionales si cumple con las condiciones
+              // Por ejemplo, marcar al profesor como no apto durante 7 días
+              setIsApto(false);
+  
+              // Puedes realizar más acciones aquí según tus necesidades
+            }
+          }
+        }
+  
+        console.log(`Fecha actual del PC: ${DateTime.local().toLocaleString()}`);
       } catch (error) {
         console.error('Error al verificar la aptitud del profesor', error);
       }
     }
   };
+  
+  
+  
+  
 
   const handleTipoUsoChange = (event) => {
     setTipoUso(event.target.value);
